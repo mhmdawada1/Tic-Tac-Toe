@@ -1,16 +1,34 @@
 var score_one = 0;
 var score_two = 0;
-
+var current_player;
+var other_player;
+function retrieveName1() {
 var current_player = document.getElementById("name1").innerText;
+}
+function retrieveName2() {
 var other_player = document.getElementById("name2").innerText;
+}
+
 var symbol = "X";
 var boxes = ["N","N","N","N","N","N","N","N","N"] //N as in no character in the cell
 var win_comb = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
 
+document.addEventListener("DOMContentLoaded", function() {
+    retrieveName1();
+    retrieveName2();
+    var cells = document.getElementsByTagName("td");
+  
+    for (var i = 0; i < cells.length; i++) {
+      cells[i].addEventListener("click", function() {
+        makeMove(this.id.charAt(4));
+      });
+    }
+  });
+
 function makeMove(box) {
     if (boxes[box] == "N") {
-        document.getElementById("cell" + box).innerHTML = "X";
-        boxes[box] = "X";
+        document.getElementById("cell" + box).innerHTML = symbol;
+        boxes[box] = symbol;
     }
     else { alert("Sorry, Box Already been played");
 }
@@ -31,27 +49,42 @@ function makeMove(box) {
     } else if (checkDraw() == true) {
         document.getElementById("result").innerText = "It's a draw ya shabeb!";
         setTimeout(restart,1000);
-    } else { if (symbol == "X") {
-        symbol = "O";
-    } else {
-        symbol = "X";
+    } else { symbol = symbol == "X" ? "O" : "X"; }
     }
- }
 
-}
 function checkWin(symbol) {
     for (var i = 0; i < win_comb.length; i++) {
         var combination = win_comb[i];
         var won = true;
-        for (var j = 0;i < combination.length; i++) {
-            if (boxes[combination[j]] != symbol) {
+
+        for (var j = 0; j < combination.length; j++) {
+            if (boxes[combination[j]] !== symbol) {
                 won = false;
                 break;
             }
         }
-        if (won == true) {
-            return true;
-        } else {return false;}
+    if (won) {
+        return true;
+        break;
     }
-
 }
+return won;
+}
+
+function checkDraw() {
+    if (boxes.indexOf("N") == -1) {
+        return true;
+    }
+    else { 
+        return false;
+    }
+}
+function updateScore(symbol) {
+    if (symbol === "X") {
+      score_one++;
+      document.getElementById("scoreX").innerText = score_one;
+    } else if (symbol === "O") {
+      score_two++;
+      document.getElementById("scoreO").innerText = score_two;
+    }
+  }

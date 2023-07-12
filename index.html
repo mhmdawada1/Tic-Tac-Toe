@@ -6,8 +6,8 @@
     </head>
     <body>
         <form>
-            player 1: <input type="text" id="name1" placeholder="enter name"><br>
-            player 2: <input type="text" id="name2" placeholder="enter name">
+            player 1: <input type="text" id="name1" placeholder="enter name"><input type="submit" onclick = "retrieveName1()"><br>
+            player 2: <input type="text" id="name2" placeholder="enter name"> <input type="submit" onclick = "retrieveName2()">
         </form>
         <h3>Score is: </h3>
         <p>Player X: <span id = "scoreX">0</span></p>
@@ -15,19 +15,19 @@
         <h3 id="result"></h4>
         <table id="game">
             <tr>
-                <td id="cell0" onclick="makeMove(0)"></td>
-                <td id="cell1" onclick="makeMove(1)"></td>
-                <td id="cell2" onclick="makeMove(2)"></td>
+                <td id="cell0"></td>
+                <td id="cell1"></td>
+                <td id="cell2"></td>
             </tr>
             <tr>
-                <td id="cell3" onclick="makeMove(3)"></td>
-                <td id="cell4" onclick="makeMove(4)"></td>
-                <td id="cell5" onclick="makeMove(5)"></td>
+                <td id="cell3"></td>
+                <td id="cell4"></td>
+                <td id="cell5"></td>
             </tr>
             <tr>
-                <td id="cell6" onclick="makeMove(6)"></td>
-                <td id="cell7" onclick="makeMove(7)"></td>
-                <td id="cell8" onclick="makeMove(8)"></td>
+                <td id="cell6"></td>
+                <td id="cell7"></td>
+                <td id="cell8"></td>
             </tr>
         </table>
         <script src="script.js"></script>
