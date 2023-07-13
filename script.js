@@ -3,10 +3,10 @@ var score_two = 0;
 var current_player;
 var other_player;
 function retrieveName1() {
-var current_player = document.getElementById("name1").innerText;
+var current_player = document.getElementById("name1").innerHTML;
 }
 function retrieveName2() {
-var other_player = document.getElementById("name2").innerText;
+var other_player = document.getElementById("name2").innerHTML;
 }
 
 var symbol = "X";
@@ -33,15 +33,14 @@ function makeMove(box) {
     else { alert("Sorry, Box Already been played");
 }
     if (checkWin(symbol) == true) {
-        document.getElementById("result").innerText = "player " + current_player + " wins!";
+        document.getElementById("result").innerText = "player " + symbol + " wins!";
         updateScore(symbol);
+        highlightWinningCells();
         closeTable();
 
         if (score_one == 3){
             document.getElementById("result").innerText += ", Game Over!";
             closeTable();
-        } else if (score_two == 3){
-            document.getElementById("result").innerText = "Player " + other_player + " wins, Game Over!";
         } else {
             setTimeout(restart,1000);
         }
@@ -86,5 +85,38 @@ function updateScore(symbol) {
     } else if (symbol === "O") {
       score_two++;
       document.getElementById("scoreO").innerText = score_two;
+    }
+  }
+
+function closeTable() {
+    var cells = document.getElementsByTagName("td");
+    for (var i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener("click",makeMove);
+    }
+}
+
+function restart() {
+    symbol = "X";
+    cells = document.getElementsByTagName("td");
+    boxes = ["N","N","N","N","N","N","N","N","N"];
+    document.getElementById("result").innerText = "";
+    for (var i = 0; i < cells.length; i++) {
+        cells[i].innerText = "";
+        cells[i].removeEventListener("click", function() {
+          makeMove(this.id.charAt(4));
+        });
+      }
+}
+
+function highlightWinningCells() {
+    for (var i = 0; i < win_comb.length; i++) {
+      var combination = win_comb[i];
+      var cellsToHighlight = combination.map(function(box) {
+        return document.getElementById("cell" + box);
+      });
+  
+      cellsToHighlight.forEach(function(cell) {
+        cell.classList.add("win-cell");
+      });
     }
   }
