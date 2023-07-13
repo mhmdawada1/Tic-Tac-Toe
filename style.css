@@ -1,14 +1,32 @@
 #game {
     margin: auto;
 }
+h1 {
+    font-size: 48px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    color: #28eaaf;
+}
+body{
+    background-color: #333333;
+}
+p {
+    color: #ffffff;
+}
+span {
+    color: #ffffff;
+}
+h3 {
+    color: #ffffff;
+}
 td{
     width: 150px;
     height: 150px;
     font-size: 48px;
     font-family: 'Times New Roman', Times, serif;
-    border-left: 1px solid;
-    border-bottom: 1px solid;
+    border : 1px solid;
     text-align: center;
+    color: #28eaaf;
 }
 h3{
     font-weight: 900;
@@ -20,20 +38,21 @@ td.win-cell {
     position: relative;
   }
   
-  td.win-cell::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: red;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease-out;
+  #name1{
+    width: 100px;
+    height: 20px;
   }
-  
-  td.win-cell.animating::after {
-    transform: scaleX(1);
+  #name2{
+    width: 100px;
+    height: 20px;
+    margin-bottom: 20px;
   }
-  
+  #btn-submit {
+    background-color: #28eaaf;
+    color: #333333;
+    border: none;
+    height: 20px;
+    width: 100px;
+    text-decoration: none;
+    margin-top: 20px;
+  }

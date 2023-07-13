@@ -1,21 +1,24 @@
 var score_one = 0;
 var score_two = 0;
+var current_player;
+var other_player;
 
 const retrieveName1 = () => {
-    let current_player = document.getElementById("name1").value;
+    current_player = document.getElementById("name1").value;
+    other_player = document.getElementById("name2").value;
 }
-const retrieveName2 = () => {
-    let other_player = document.getElementById("name2").value;
-}
-
-
+document.addEventListener("DOMContentLoaded", function() {
+    var form = document.querySelector("form");
+    form.addEventListener("submit", function(event) {
+      event.retrieveName1();
+    });
+  });
 var symbol = "X";
 var boxes = ["N","N","N","N","N","N","N","N","N"] //N as in no character in the cell
 var win_comb = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
 
 document.addEventListener("DOMContentLoaded", function() {
     retrieveName1();
-    retrieveName2();
     var cells = document.getElementsByTagName("td");
   
     for (var i = 0; i < cells.length; i++) {
@@ -40,9 +43,9 @@ function makeMove(box) {
         if (score_one == 3 || score_two == 3){
             document.getElementById("result").innerText += ", Game Over!";
             closeTable();
-            setTimeout(restart,10000);
+            setTimeout(restart,5000);
         } else {
-            setTimeout(restart,1000);
+            setTimeout(restart,5000);
         }
 
     } else if (checkDraw() == true) {
@@ -114,3 +117,4 @@ function restart() {
 }
 
 }
+
