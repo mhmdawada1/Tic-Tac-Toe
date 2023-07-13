@@ -17,4 +17,23 @@ h3{
 }
 td.win-cell {
     text-decoration: line-through;
+    position: relative;
   }
+  
+  td.win-cell::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: red;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+  }
+  
+  td.win-cell.animating::after {
+    transform: scaleX(1);
+  }
+  

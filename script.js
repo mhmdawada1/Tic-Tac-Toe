@@ -1,13 +1,13 @@
 var score_one = 0;
 var score_two = 0;
-var current_player;
-var other_player;
-function retrieveName1() {
-var current_player = document.getElementById("name1").innerHTML;
+
+const retrieveName1 = () => {
+    let current_player = document.getElementById("name1").value;
 }
-function retrieveName2() {
-var other_player = document.getElementById("name2").innerHTML;
+const retrieveName2 = () => {
+    let other_player = document.getElementById("name2").value;
 }
+
 
 var symbol = "X";
 var boxes = ["N","N","N","N","N","N","N","N","N"] //N as in no character in the cell
@@ -35,12 +35,12 @@ function makeMove(box) {
     if (checkWin(symbol) == true) {
         document.getElementById("result").innerText = "player " + symbol + " wins!";
         updateScore(symbol);
-        highlightWinningCells();
         closeTable();
 
-        if (score_one == 3){
+        if (score_one == 3 || score_two == 3){
             document.getElementById("result").innerText += ", Game Over!";
             closeTable();
+            setTimeout(restart,10000);
         } else {
             setTimeout(restart,1000);
         }
@@ -106,17 +106,11 @@ function restart() {
           makeMove(this.id.charAt(4));
         });
       }
+      if (score_one === 3 || score_two === 3) {
+        score_one = 0;
+        score_two = 0;
+        document.getElementById("scoreX").innerText = score_one;
+        document.getElementById("scoreO").innerText = score_two;
 }
 
-function highlightWinningCells() {
-    for (var i = 0; i < win_comb.length; i++) {
-      var combination = win_comb[i];
-      var cellsToHighlight = combination.map(function(box) {
-        return document.getElementById("cell" + box);
-      });
-  
-      cellsToHighlight.forEach(function(cell) {
-        cell.classList.add("win-cell");
-      });
-    }
-  }
+}
